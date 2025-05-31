@@ -11,7 +11,7 @@ var students: [Student] = []
 
 func showMenu() {
     print("""
-    ========= Student Management System =========
+    \n========= Student Management System =========
     1. Add a new student
     2. View all students
     3. Calculate grade point average for a student
@@ -20,7 +20,6 @@ func showMenu() {
     ============================================
     Enter your choice:
     """)
-    print("\n")
 }
 
 var running = true
@@ -28,8 +27,7 @@ var running = true
 while running {
     showMenu()
     if let choice = readLine() {
-        switch choice {
-        case "1":
+        if choice == "1" {
             print("Enter student ID:")
             let idInput = readLine()
             if let idInput = idInput, let id = Int(idInput) {
@@ -45,18 +43,14 @@ while running {
                         print("Student added successfully!")
                     } else {
                         print("Invalid grades.")
-                        continue
                     }
                 } else {
                     print("Invalid name.")
-                    continue
                 }
             } else {
                 print("Invalid ID input.")
-                continue
             }
-
-        case "2":
+        } else if choice == "2" {
             print("\n--- Student List ---")
             if students.isEmpty {
                 print("No students to display.")
@@ -66,8 +60,7 @@ while running {
                     print("\n")
                 }
             }
-
-        case "3":
+        } else if choice == "3" {
             print("Enter student ID to calculate average:")
             let idInput = readLine()
             if let idInput = idInput, let id = Int(idInput) {
@@ -78,10 +71,8 @@ while running {
                 }
             } else {
                 print("Invalid ID.")
-                continue
             }
-
-        case "4":
+        } else if choice == "4" {
             print("\n--- Passing Students ---")
             for student in students where student.isPassing() {
                 print("\(student.name) (Average: \(String(format: "%.2f", student.average())))")
@@ -91,12 +82,10 @@ while running {
             for student in students where !student.isPassing() {
                 print("\(student.name) (Average: \(String(format: "%.2f", student.average())))\n")
             }
-
-        case "5":
+        } else if choice == "5" {
             print("Exiting the Student Management System. See you soon!")
             running = false
-
-        default:
+        } else {
             print("Invalid choice. Please choose a one of the avalible options.")
         }
     }
